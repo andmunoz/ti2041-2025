@@ -1,0 +1,9 @@
+<h1>Jalisco</h1>
+<p>Estoy pensando en un número entre 1 y 100. Trata de adivinarlo</p>
+<form method="POST">
+    {% csrf_token %}
+    Tu respuesta: 
+    <input type="text" name="numero" />
+    <button type="submit">Responder</button>
+</form>
+<p>{{ respuesta|default:'' }}</p>
