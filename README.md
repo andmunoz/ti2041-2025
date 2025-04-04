@@ -33,13 +33,20 @@ Recuerde que estas carpetas no se van a subir al repo mientras no tengan conteni
 - [Python](https://www.python.org/downloads/): Compilador base para el uso del lenguaje.
 - [PIP](https://pypi.org/project/pip/): Gestor de paquetes de Python.
 - [Django](https://www.djangoproject.com/): Framework de desarrollo back-end para Python.
-- [DjangoRest](https://www.django-rest-framework.org/): Framework de desarrollo de API's para Python.
+- [Django Ninja](https://django-ninja.dev/): Framework de desarrollo de API's para Python.
 
-**Nota**: **Django** y **DjangoRest** se descargan utilizando Python directamente, no requiere una instalación manual.
+**Nota**: **Django** y **Django Nimja** se descargan utilizando Python directamente, no requiere una instalación manual.
 
-### Instalación de Django
+### Instalación de Django y Django Ninja
 
-<code>**python -m pip install Django==5.1.1**</code>
+Para la instalación de Django, se puede hacer de 3 formas diferentes:
 
-<code>**py -m pip install Django==5.1.1**</code>
+- <code>**python -m pip install Django**</code>
+- <code>**py -m pip install Django**</code>
+- <code>**pip install Django**</code>
 
+Dependiendo de la configuración local de su computadora. Es por eso que, antes de continuar, se debe probar cuál de las tres instrucciones es la adecuada: <code>python</code>, <code>py</code> o <code>pip</code>. De la misma forma se instala Django Ninja:
+
+- <code>**python -m pip install django-ninja**</code>
+- <code>**py -m pip install django-ninja**</code>
+- <code>**pip install django-ninja**</code>
