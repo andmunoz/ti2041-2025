@@ -1,0 +1,6 @@
+<form method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="id" value="{{ post.id }}"/>
+    ¿Está seguro que quiere eliminar el artículo {{ post.title }}?<br />
+    <button type="submit">Sí</button>
+</form>
