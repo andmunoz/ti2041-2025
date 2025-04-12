@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Post
+from .models import Post, Tag, Category
 
 # Create your views here.
 def index(request):
@@ -25,9 +25,12 @@ def newpost(request):
 def viewpost(request):
     post_id = request.GET.get('id')
     post = Post.objects.get(id=post_id)
+    tags = Tag.objects.filter(post__id=post_id)
     context = {
         'post': post,
+        'tags': tags,
     }
+    print(post)
     return render(request, 'viewpost.html', context)
 
 

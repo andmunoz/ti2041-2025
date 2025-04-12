@@ -8,4 +8,14 @@
     <tr>
         <td>{{ post.publish_date }}</td>
     </tr>
+    <tr>
+        <td>{{ post.category }}</td>
+    </tr>
+    <tr>
+        <td>
+            {% for tag in tags %}
+                {{ tag }}
+            {% endfor %}
+        </td>
+    </tr>
 </table>
