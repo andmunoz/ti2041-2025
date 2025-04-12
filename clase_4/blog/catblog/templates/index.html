@@ -1,0 +1,21 @@
+<a href="new/">Crear</a>
+<table>
+    <thead>
+        <td>Título</td>
+        <td>Fecha</td>
+        <td>&nbsp;</td>
+    </thead>
+    <tbody>
+        {% for post in posts %}
+        <tr>
+            <td>{{ post.title }}</td>
+            <td>{{ post.publish_date }}</td>
+            <td>
+                <a href="view?id={{ post.id }}">Ver</a>
+                <a href="edit?id={{ post.id }}">Editar</a>
+                <a href="delete?id={{ post.id }}">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
