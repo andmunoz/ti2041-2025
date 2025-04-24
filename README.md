@@ -3,6 +3,7 @@ Este repositorio fue dispuesto para el Curso de Programación Back-End. En el re
 - Ejemplos usados en clase
 - Soluciones a ejercicios propuestos en clase
 - Enunciados y soluciones propuestas a las evaluaciones del curso
+- Información complementaria para el uso del curso
 
 Cualquier consulta o aporte, puedes contactar a tu profesor a su correo electrónico.
 
