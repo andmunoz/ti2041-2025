@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <a class="waves-effect waves-light btn-small" href="{% url 'create_post' %}"><i class="material-icons">add</i>Crear</a>
+    <table class="striped">
+        <thead>
+            <th>Título</th>
+            <th>Fecha</th>
+            <th>&nbsp;</th>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td>{{ post.title|truncatechars:70 }}</td>
+                <td>{{ post.publish_date|date:"d/m/Y" }}</td>
+                <td>
+                    <a class="waves-effect waves-light btn-small" href="{% url 'view_post' %}?id={{ post.id }}">Ver</a>
+                    <a class="waves-effect waves-light btn-small" href="{% url 'edit_post' %}?id={{ post.id }}">Editar</a>
+                    <a class="waves-effect waves-light btn-small" href="{% url 'delete_post' %}?id={{ post.id }}">Eliminar</a>
+                    
+                    <!-- Modal Trigger -->
+                    <!-- a class="waves-effect waves-light btn-small modal-trigger" href="#delete_modal_{{ post.id }}">Eliminar</a -->
+
+                    <!-- Modal Structure -->
+                    <!-- div id="delete_modal_{{ post.id }}" class="modal">
+                        <form method="POST" action="{% url 'delete_post' %}">
+                            {% csrf_token %}
+                            <div class="modal-content">
+                                <h4>Eliminar Post</h4>
+                                <p>
+                                        <input type="hidden" name="id" value="{{ post.id }}"/>
+                                        ¿Está seguro que quiere eliminar el artículo {{ post.title|truncatechars:30 }}?<br />
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit">Sí</button>
+                                <button class="modal-close">No</button>
+                            </div>
+                        </form>
+                    </div -->
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
