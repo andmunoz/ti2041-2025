@@ -1,4 +1,19 @@
 <div>
+    {% if user.is_authenticated %}
+        Bienvenido {{ user.first_name }} {{ user.last_name }} ({{ username }})
+        <form method="POST" action=".">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="logout" />
+            <button type="submit" class="waves-effect waves-light btn-small">Salir</button>
+        </form>
+    {% else %}
+        <form method="POST" action=".">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="login" />
+            <input type="text" name="username" /><input type="password" name="password" />
+            <button type="submit" class="waves-effect waves-light btn-small">Ingresar</button>
+        </form>
+    {% endif %}
     <a href="{% url 'index' %}">Ir al inicio</a>
     <h1>Bienvenidos a mi Catblog Personal</h1>
 </div>

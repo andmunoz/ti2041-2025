@@ -50,6 +50,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Configuraciones de Sesión
+SESSION_COOKIE_AGE = 180   # 3 minutos
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_SECURE = True
+
 ROOT_URLCONF = 'blog.urls'
 
 TEMPLATES = [
