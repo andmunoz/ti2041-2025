@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if perms.catblog.add_post %}
+        <a class="waves-effect waves-light btn-small" href="{% url 'create_post' %}">Crear</a>
+    {% endif %}
+    <table class="striped" style="width: 100%; table-layout: fixed;">
+        <colgroup>
+            <col style="width: auto;">
+            <col style="width: 150px;">
+            <col style="width: 150px;">
+            <col style="width: 300px;">
+        </colgroup>
+        <thead>
+            <th>Título</th>
+            <th>Fecha</th>
+            <th>Creador</th>
+            <th>&nbsp;</th>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td>{{ post.title|truncatechars:70 }}</td>
+                <td>{{ post.publish_date|date:"d/m/Y" }}</td>
+                <td>{{ post.owner.username }}</td>
+                <td>
+                    <a class="waves-effect waves-light btn-small" href="{% url 'view_post' %}?id={{ post.id }}">Ver</a>
+                    {% if post.owner == request.user %}
+                        <a class="waves-effect waves-light btn-small" href="{% url 'edit_post' %}?id={{ post.id }}">Editar</a>
+                    {% endif %}
+                    {% if post.owner == request.user %}
+                        <a class="waves-effect waves-light btn-small" href="{% url 'delete_post' %}?id={{ post.id }}">Eliminar</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+<!-- and perms.catblog.change_post and perms.catblog.delete_post -->
