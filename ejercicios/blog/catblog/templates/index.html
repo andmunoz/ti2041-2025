@@ -25,10 +25,10 @@
                 <td>{{ post.owner.username }}</td>
                 <td>
                     <a class="waves-effect waves-light btn-small" href="{% url 'view_post' %}?id={{ post.id }}">Ver</a>
-                    {% if post.owner == request.user %}
+                    {% if post.owner == request.user and perms.catblog.change_post %}
                         <a class="waves-effect waves-light btn-small" href="{% url 'edit_post' %}?id={{ post.id }}">Editar</a>
                     {% endif %}
-                    {% if post.owner == request.user %}
+                    {% if post.owner == request.user and perms.catblog.delete_post %}
                         <a class="waves-effect waves-light btn-small" href="{% url 'delete_post' %}?id={{ post.id }}">Eliminar</a>
                     {% endif %}
                 </td>

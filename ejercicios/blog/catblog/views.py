@@ -23,7 +23,10 @@ def index(request):
             logout(request)
             request.session.set_expiry(-1)
 
-    posts = Post.objects.filter(active_post=True).order_by('publish_date')
+    if request.user.is_authenticated: 
+        posts = Post.objects.filter(active_post=True, owner=request.user).order_by('publish_date')
+    else:
+        posts = Post.objects.filter(active_post=True).order_by('publish_date')
 
     context = {
         'posts': posts,
@@ -34,7 +37,7 @@ def index(request):
     return render(request, 'index.html', context) 
 
 
-@permission_required('catblog.add_post', login_url='error_403', raise_exception=True)
+@permission_required('catblog.add_post', login_url='error_403')
 def newpost(request):
     if request.method == 'POST':
         post = Post(
@@ -59,7 +62,7 @@ def viewpost(request):
     return render(request, 'viewpost.html', context)
 
 
-@permission_required('catblog.change_post', login_url='error_403', raise_exception=True)
+@permission_required('catblog.change_post', login_url='error_403')
 def editpost(request):
     if request.method == 'POST':
         post_id = request.POST.get('id')
