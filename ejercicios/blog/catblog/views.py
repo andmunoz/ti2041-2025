@@ -18,6 +18,8 @@ def index(request):
             if usuario is not None:
                 login(request, usuario)
                 request.session['username'] = username
+            else: 
+                return render(request, 'error401.html')
 
         elif action == 'logout':
             logout(request)
