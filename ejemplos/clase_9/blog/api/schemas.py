@@ -7,3 +7,4 @@ class PostSchema(Schema):
     author_id: int
     category_id: int
     publish_date: date
+    status: bool

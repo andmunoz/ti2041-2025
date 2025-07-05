@@ -8,13 +8,13 @@
             <td>{{ post.title }}</td>
         </tr>
         <tr>
-            <td>{{ post.content|default:"Sin contenido" }}</td>
+            <td>{{ post.text|default:"Sin contenido" }}</td>
         </tr>
         <tr>
             <td>{{ post.publish_date|date:"d/m/Y" }}</td>
         </tr>
         <tr>
-            <td>{{ post.category|default:"Sin categoría" }}</td>
+            <td>{{ post.category_id|default:"Sin categoría" }}</td>
         </tr>
         <tr>
             <td>

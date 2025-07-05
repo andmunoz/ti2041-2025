@@ -34,8 +34,9 @@ def error_validacion(request, ex):
          description="Se obtienen todos los artículos en orden de publicación",
          tags=["Posts"])
 def get_posts(request):
-    all_posts = Post.objects.all().order_by('publish_date').values()
+    all_posts = Post.objects.filter(status=True).order_by('publish_date').values()
     return list(all_posts)
+
 
 @app.get(path="posts/{post_id}",
          summary="Artículo Específico",
@@ -46,6 +47,7 @@ def get_post(request, post_id: int = Path(..., description="ID del artículo", g
     post = get_object_or_404(Post, id=post_id)
     return post
 
+
 @app.post(path="posts/", 
          summary="Agregar Artículo",
          description="Se envía un artículo al servidor para ser creado", 
@@ -53,6 +55,7 @@ def get_post(request, post_id: int = Path(..., description="ID del artículo", g
 def add_post(request, data: PostSchema):
     post = Post.objects.create(**data.dict())
     return { "id": post.id, "title": post.title }
+
 
 @app.put(path="posts/{post_id}", 
          summary="Modificar Artícxulo",
@@ -65,6 +68,7 @@ def update_post(request, post_id: int, data: PostSchema):
     post.save()
     return { "id": post.id, "title": post.title }
 
+
 @app.patch(path="posts/{post_id}", 
          summary="Modificar partes Artículo",
          description="Se modifican atributos del artículo como no vigente.", 
@@ -72,9 +76,13 @@ def update_post(request, post_id: int, data: PostSchema):
 def patch_post(request, post_id: int):
     return {}
 
+
 @app.delete(path="posts/{post_id}", 
          summary="Eliminar Artículo",
          description="Se marca el artículo como no vigente.", 
          tags=["Posts"])
 def delete_post(request, post_id: int):
-    return {}
+    post = get_object_or_404(Post, id=post_id)
+    setattr(post, 'status', False)
+    post.save()
+    return { "id": post.id, "title": post.title }

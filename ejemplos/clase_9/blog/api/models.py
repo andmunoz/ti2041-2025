@@ -27,6 +27,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag)
     publish_date = models.DateField(default=timezone.now)
+    status = models.BooleanField(default=True)
     
     def __str__(self):
         return self.title + " (" + self.author.get_username() + ")"

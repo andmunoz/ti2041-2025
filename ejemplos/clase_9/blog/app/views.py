@@ -39,7 +39,15 @@ def index(request):
 @login_required(login_url='error_403')
 def newpost(request):
     if request.method == 'POST':
-        post = {}
+        post = {
+            'title': request.POST['title'],
+            'text': request.POST['content'],
+            'author_id': request.user.id,
+            'category_id': 1,
+            'publish_date': '2025-07-05',
+            'status': True,
+        }
+        response = requests.post(f'{apiURL}/posts/', json=post)
         return redirect('index')
     return render(request, 'newpost.html')
 
@@ -48,21 +56,31 @@ def viewpost(request):
     post_id = request.GET.get('id')
     response = requests.get(f'{apiURL}/posts/{post_id}')
     if response.status_code == 200:
-        posts = response.json()
+        post = response.json()
     context = {
-        'post': posts[0]
+        'post': post
     }
     return render(request, 'viewpost.html', context)
+
 
 @login_required(login_url='error_403')
 def editpost(request):
     if request.method == 'POST':
-        post_id = request.POST.get('id')
-        post = {}
-        return redirect('index')
-    post = {}
+        post_id = request.POST['id']
+        response = requests.get(f'{apiURL}/posts/{post_id}')
+        if response.status_code == 200:
+            post = response.json()
+            post['title'] = request.POST['title']
+            post['text'] = request.POST['content']
+            response = requests.put(f'{apiURL}/posts/{post_id}', json=post)
+
+    post_id = request.GET.get('id')
+    response = requests.get(f'{apiURL}/posts/{post_id}')
+    if response.status_code == 200:
+        post = response.json()
     context = {
-        'post': post
+        'post_id': post_id,
+        'post': post,
     }
     return render(request, 'editpost.html', context)
 
@@ -71,11 +89,11 @@ def editpost(request):
 def deletepost(request):
     if request.method == 'POST':
         post_id = request.POST.get('id')
-        post = {}
+        response = requests.delete(f'{apiURL}/posts/{post_id}')
         return redirect('index')
+
     post_id = request.GET.get('id')
-    post = {}
     context = {
-        'post': post
+        'post_id': post_id
     }
     return render(request, 'deletepost.html', context)
